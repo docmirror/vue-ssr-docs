@@ -1,14 +1,14 @@
 module.exports = {
   locales: {
     '/': {
-      lang: 'en-US',
-      title: 'Vue SSR Guide',
-      description: 'Vue.js Server-Side Rendering Guide'
-    },
-    '/zh/': {
       lang: 'zh-CN',
       title: 'Vue SSR 指南',
       description: 'Vue.js 服务端渲染指南'
+    },
+    '/en': {
+      lang: 'en-US',
+      title: 'Vue SSR Guide',
+      description: 'Vue.js Server-Side Rendering Guide'
     },
     '/ja/': {
       lang: 'ja',
@@ -22,12 +22,12 @@ module.exports = {
     }
   },
   serviceWorker: true,
-  theme: 'vue',
+  // theme: 'vue',
   themeConfig: {
     repo: 'vuejs/vue-ssr-docs',
     docsDir: 'docs',
     locales: {
-      '/': {
+      '/en': {
         label: 'English',
         selectText: 'Languages',
         editLinkText: 'Edit this page on GitHub',
@@ -58,7 +58,7 @@ module.exports = {
           '/guide/non-node'
         ]
       },
-      '/zh/': {
+      '/': {
         label: '简体中文',
         selectText: '选择语言',
         editLinkText: '在 GitHub 上编辑此页',
