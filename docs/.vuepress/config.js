@@ -1,5 +1,6 @@
 module.exports = {
   dest: 'site',
+  base:'/site/',
   locales: {
     '/': {
       lang: 'zh-CN',
