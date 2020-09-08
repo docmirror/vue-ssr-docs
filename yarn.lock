@@ -723,11 +723,6 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@docmirror/vuepress-theme-vue@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@docmirror/vuepress-theme-vue/-/vuepress-theme-vue-1.1.1.tgz#bb3927f25983aa468157306be05462ccaaf7ad17"
-  integrity sha512-kZCC1qbv7RG1Se7TZ+ot5t0Jdmwy05zMCT+jiUhLEAkP81E9ntqzEUwihqCgxMKJHICxICibk78HjoYLIV6Kkw==
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -6725,6 +6720,11 @@ vuepress-html-webpack-plugin@^3.2.0:
     tapable "^1.0.0"
     toposort "^1.0.0"
     util.promisify "1.0.0"
+
+vuepress-theme-docmirror@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/vuepress-theme-docmirror/-/vuepress-theme-docmirror-1.1.1.tgz#8bd68c64c99e671d9fa668137a7935da7d2d2483"
+  integrity sha512-6xGTpp0mhRHOK2pVmxXmG1wjZkv6RKUlIBn2RuWXu6HjJE0CaYhb7tYxb6WaHUOYFKcOe68xml+70cW2CAhlLw==
 
 vuepress@^0.14.11:
   version "0.14.11"
