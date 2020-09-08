@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>データのプリフェッチと状態 | Vue SSR ガイド</title>
+    <meta name="description" content="Vue.js サーバーサイドレンダリングガイド">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.6216b4ed.css" as="style"><link rel="preload" href="/assets/js/app.857f8442.js" as="script"><link rel="preload" href="/assets/js/38.cf5a3a6d.js" as="script"><link rel="prefetch" href="/assets/js/31.e70f56c9.js"><link rel="prefetch" href="/assets/js/1.4ba6ebae.js"><link rel="prefetch" href="/assets/js/2.535f3c53.js"><link rel="prefetch" href="/assets/js/3.e5730be8.js"><link rel="prefetch" href="/assets/js/4.0d83e6d4.js"><link rel="prefetch" href="/assets/js/5.9206f5fa.js"><link rel="prefetch" href="/assets/js/6.01fc6541.js"><link rel="prefetch" href="/assets/js/7.044d3af9.js"><link rel="prefetch" href="/assets/js/8.6a2b3380.js"><link rel="prefetch" href="/assets/js/9.63f778c7.js"><link rel="prefetch" href="/assets/js/10.f7960911.js"><link rel="prefetch" href="/assets/js/11.a592910a.js"><link rel="prefetch" href="/assets/js/12.6717a33d.js"><link rel="prefetch" href="/assets/js/13.682a40a0.js"><link rel="prefetch" href="/assets/js/14.98252396.js"><link rel="prefetch" href="/assets/js/15.fcc3f916.js"><link rel="prefetch" href="/assets/js/16.18e3e209.js"><link rel="prefetch" href="/assets/js/17.d5012f0a.js"><link rel="prefetch" href="/assets/js/18.3facfce8.js"><link rel="prefetch" href="/assets/js/19.6bced45f.js"><link rel="prefetch" href="/assets/js/20.f31829e2.js"><link rel="prefetch" href="/assets/js/21.9f5a2bb3.js"><link rel="prefetch" href="/assets/js/22.67a7b679.js"><link rel="prefetch" href="/assets/js/23.86b71d0a.js"><link rel="prefetch" href="/assets/js/24.9a66fd58.js"><link rel="prefetch" href="/assets/js/25.f9522ed8.js"><link rel="prefetch" href="/assets/js/26.6e7f9c0d.js"><link rel="prefetch" href="/assets/js/27.e9d08b47.js"><link rel="prefetch" href="/assets/js/28.76611bff.js"><link rel="prefetch" href="/assets/js/29.ea593b17.js"><link rel="prefetch" href="/assets/js/30.c5eb0f84.js"><link rel="prefetch" href="/assets/js/32.5f5dd21a.js"><link rel="prefetch" href="/assets/js/33.0a625a25.js"><link rel="prefetch" href="/assets/js/34.d2733537.js"><link rel="prefetch" href="/assets/js/35.ddc557a5.js"><link rel="prefetch" href="/assets/js/36.a489edf1.js"><link rel="prefetch" href="/assets/js/37.136d8c88.js"><link rel="prefetch" href="/assets/js/39.e9646dd4.js"><link rel="prefetch" href="/assets/js/40.4ce1a813.js"><link rel="prefetch" href="/assets/js/41.da8c6de2.js"><link rel="prefetch" href="/assets/js/42.c04c89ae.js"><link rel="prefetch" href="/assets/js/43.150fa123.js"><link rel="prefetch" href="/assets/js/44.fe85991f.js"><link rel="prefetch" href="/assets/js/45.a7ccbd7a.js"><link rel="prefetch" href="/assets/js/46.80bff42e.js"><link rel="prefetch" href="/assets/js/47.3938d7f5.js"><link rel="prefetch" href="/assets/js/48.bc91a1ba.js"><link rel="prefetch" href="/assets/js/49.311640c6.js"><link rel="prefetch" href="/assets/js/50.d3346077.js"><link rel="prefetch" href="/assets/js/51.e7924f3c.js"><link rel="prefetch" href="/assets/js/52.41301aea.js"><link rel="prefetch" href="/assets/js/53.ef26fe4d.js"><link rel="prefetch" href="/assets/js/54.5f99a77e.js"><link rel="prefetch" href="/assets/js/55.b28f8acf.js"><link rel="prefetch" href="/assets/js/56.c1e1643d.js"><link rel="prefetch" href="/assets/js/57.bfaa829e.js"><link rel="prefetch" href="/assets/js/58.97c40fd9.js"><link rel="prefetch" href="/assets/js/59.96f5b32e.js"><link rel="prefetch" href="/assets/js/60.5605712f.js"><link rel="prefetch" href="/assets/js/61.5678ceef.js"><link rel="prefetch" href="/assets/js/62.6717708a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6216b4ed.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/ja/" class="home-link router-link-active"><!----> <span class="site-name">Vue SSR ガイド</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/ja/guide/" class="nav-link router-link-active">ガイド</a></div><div class="nav-item"><a href="/ja/api/" class="nav-link">API リファレンス</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">言語</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/data.html" class="nav-link">简体中文</a></li><li class="dropdown-item"><!----> <a href="/en.html" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/ja/guide/data.html" class="nav-link router-link-exact-active router-link-active">日本語</a></li><li class="dropdown-item"><!----> <a href="/ru/guide/data.html" class="nav-link">Русский</a></li></ul></div></div> <a href="https://github.com/vuejs/vue-ssr-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/ja/guide/" class="nav-link router-link-active">ガイド</a></div><div class="nav-item"><a href="/ja/api/" class="nav-link">API リファレンス</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">言語</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/data.html" class="nav-link">简体中文</a></li><li class="dropdown-item"><!----> <a href="/en.html" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/ja/guide/data.html" class="nav-link router-link-exact-active router-link-active">日本語</a></li><li class="dropdown-item"><!----> <a href="/ru/guide/data.html" class="nav-link">Русский</a></li></ul></div></div> <a href="https://github.com/vuejs/vue-ssr-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav> <div style="padding:20px 30px  0px 30px;"><a target="_blank" href="https://www.aliyun.com/minisite/goods?userCode=qya11txb" style="width:100%"><img src="https://img.alicdn.com/tfs/TB1qnR3R1L2gK0jSZFmXXc7iXXa-440-240.jpg" style="width:100%"></a></div> <ul class="sidebar-links"><li><a href="/ja/" class="sidebar-link">はじめに</a></li><li><a href="/ja/guide/" class="sidebar-link">基本的な使い方</a></li><li><a href="/ja/guide/universal.html" class="sidebar-link">ユニバーサルなコードを書く</a></li><li><a href="/ja/guide/structure.html" class="sidebar-link">ソースコードの構造</a></li><li><a href="/ja/guide/routing.html" class="sidebar-link">ルーティングとコード分割</a></li><li><a href="/ja/guide/data.html" class="active sidebar-link">データのプリフェッチと状態</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/ja/guide/data.html#データストア" class="sidebar-link">データストア</a></li><li class="sidebar-sub-header"><a href="/ja/guide/data.html#ロジックとコンポーネントとの結び付き" class="sidebar-link">ロジックとコンポーネントとの結び付き</a></li><li class="sidebar-sub-header"><a href="/ja/guide/data.html#最終状態注入" class="sidebar-link">最終状態注入</a></li><li class="sidebar-sub-header"><a href="/ja/guide/data.html#ストアコードの分割" class="sidebar-link">ストアコードの分割</a></li></ul></li><li><a href="/ja/guide/hydration.html" class="sidebar-link">クライアントサイドでのハイドレーション</a></li><li><a href="/ja/guide/bundle-renderer.html" class="sidebar-link">バンドルレンダラの紹介</a></li><li><a href="/ja/guide/build-config.html" class="sidebar-link">ビルド設定</a></li><li><a href="/ja/guide/css.html" class="sidebar-link">CSS の管理</a></li><li><a href="/ja/guide/head.html" class="sidebar-link">ヘッドの管理</a></li><li><a href="/ja/guide/caching.html" class="sidebar-link">キャッシュ</a></li><li><a href="/ja/guide/streaming.html" class="sidebar-link">ストリーミング</a></li><li><a href="/ja/guide/non-node.html" class="sidebar-link">非 Node.js 環境における使用</a></li></ul> </div> <div class="page"> <div class="content"><h1 id="データのプリフェッチと状態"><a href="#データのプリフェッチと状態" aria-hidden="true" class="header-anchor">#</a> データのプリフェッチと状態</h1> <h2 id="データストア"><a href="#データストア" aria-hidden="true" class="header-anchor">#</a> データストア</h2> <p>SSR をしているとき、基本的にはアプリケーションの&quot;スナップショット&quot;を描画しています。クライアントサイドのアプリケーションがマウントする前に、コンポーネントから非同期データが、利用可能である必要があります。つまり、それ以外の場合、クライアントアプリケーションは異なる状態を使用して描画するため、ハイドレーションは失敗します。</p> <p>この問題に対応するため、フェッチされたデータはビューコンポーネントの外でも存続している必要があります。つまり専用のデータストア (data store) もしくは &quot;状態コンテナ (state container)&quot; に入っている必要があります。サーバーサイドでは描画する前にデータをプリフェッチしてストアの中に入れることができます。さらに、アプリケーションの描画が終わった後、シリアライズして HTML にインラインで状態を埋め込みます。クライアントサイドのストアは、アプリケーションをマウントする前に、埋め込まれた状態を直接取得できます。</p> <p>このような用途として、公式の状態管理ライブラリである <a href="https://github.com/vuejs/vuex/" target="_blank" rel="noopener noreferrer">Vuex<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> を使っています。では <code>store.js</code> ファイルをつくって、そこに id に基づく item を取得するコードを書いてみましょう:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// store.js</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span>
+
+<span class="token comment">// Promise を返すユニバーサルなアプリケーションを想定しています</span>
+<span class="token comment">// また、実装の詳細は割愛します</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fetchItem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./api'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createStore</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// 重要: 状態はモジュールを複数回インスタンス化できるように、</span>
+    <span class="token comment">// 関数でなければなりません</span>
+    state<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+      items<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token function">fetchItem</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> commit <span class="token punctuation">}</span><span class="token punctuation">,</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// store.dispatch() 経由でデータがフェッチされたときにそれを知るために、Promise を返します</span>
+        <span class="token keyword">return</span> <span class="token function">fetchItem</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>item <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'setItem'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> id<span class="token punctuation">,</span> item <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token function">setItem</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token punctuation">{</span> id<span class="token punctuation">,</span> item <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Vue<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>items<span class="token punctuation">,</span> id<span class="token punctuation">,</span> item<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="warning custom-block"><p class="custom-block-title">WARNING</p> <p>ほとんどの場合、次のサーバサイドの実行においてリークしないよう、 <code>state</code> を関数でラップする必要があります。<a href="/ja/guide/structure.html#avoid-stateful-singletons">詳細情報はこちら</a></p></div> <p>そして <code>app.js</code> を更新します:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// app.js</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createRouter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./router'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createStore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./store'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> sync <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vuex-router-sync'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createApp</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ルーターとストアのインスタンスを作成します</span>
+  <span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token comment">// ルートの状態をストアの一部として利用できるよう同期します</span>
+  <span class="token function">sync</span><span class="token punctuation">(</span>store<span class="token punctuation">,</span> router<span class="token punctuation">)</span>
+
+  <span class="token comment">// アプリケーションのインスタンスを作成し、ルーターとストアの両方を挿入します</span>
+  <span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    router<span class="token punctuation">,</span>
+    store<span class="token punctuation">,</span>
+    render<span class="token punctuation">:</span> h <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token comment">// アプリケーション、ルーター、ストアを公開します</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span> app<span class="token punctuation">,</span> router<span class="token punctuation">,</span> store <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="ロジックとコンポーネントとの結び付き"><a href="#ロジックとコンポーネントとの結び付き" aria-hidden="true" class="header-anchor">#</a> ロジックとコンポーネントとの結び付き</h2> <p>ではデータをプリフェッチするアクションをディスパッチするコードはどこに置けばよいでしょうか？</p> <p>フェッチする必要があるデータはアクセスしたルート (route) によって決まります。またそのルートによってどのコンポーネントが描画されるかも決まります。実のところ、与えられたルートに必要とされるデータは、そのルートで描画されるコンポーネントに必要とされるデータでもあるのです。したがって、データをフェッチするロジックはルートコンポーネントの中に置くのが自然でしょう。</p> <p>コンポーネントでは、 <code>serverPrefetch</code> オプション (2.6.0 以降で新規追加)を使用します。このオプションは、サーバレンダラによって認識され、そして それを返す Promise が解決されるまで描画を一時停止します。これにより、描画処理中に非同期データを&quot;待つ&quot;ことができます。</p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>ルートレベルのコンポーネントだけでなく、任意のコンポーネントで <code>serverPrefetch</code> を使用できます。</p></div> <p>これは、<code>'/item/:id'</code> ルートで描画される <code>Item.vue</code> コンポーネントの例です。コンポーネントインスタンスはこの時点では既に作成されているので、 <code>this</code> にアクセスできます:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token comment">&lt;!-- Item.vue --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>item<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{ item.title }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-else</span><span class="token punctuation">&gt;</span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ストアの状態から item を表示します</span>
+    <span class="token function">item</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>items<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>$route<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// サーバサイドのみ</span>
+  <span class="token comment">// これは自動的にサーバレンダラによって呼ばれます</span>
+  <span class="token function">serverPrefetch</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// コンポーネントが描画前に待機するように</span>
+    <span class="token comment">// アクションから Promise を返す</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fetchItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// クライアントサイドのみ</span>
+  <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// まだサーバ上で描画されていない場合</span>
+    <span class="token comment">// item (最初に読み込み中テキストが表示されます) をフェッチします</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>item<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fetchItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">fetchItem</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// アクションから Promise を返す</span>
+      <span class="token keyword">return</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'fetchItem'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$route<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><div class="warning custom-block"><p class="custom-block-title">WARNING</p> <p>ロジックが 2 回実行されないようにするために、コンポーネントは <code>mounted</code> フックでサーバサイドで描画されているかどうかチェックする必要があります。</p></div> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>各コンポーネントで同じ <code>fetchItem()</code> ロジックが複数回 (<code>serverPrefetch</code>、<code>mounted</code>、そして <code>watch</code> コールバック)繰り返されているのを見つけるかもしれません。そのようなコードをシンプルにするために、あなた自身で抽象化(例えばミックスインまたはプラグイン)することを推奨します。</p></div> <h2 id="最終状態注入"><a href="#最終状態注入" aria-hidden="true" class="header-anchor">#</a> 最終状態注入</h2> <p>これで、描画プロセスがコンポーネント内のデータフェッチを待つことがわかりましたが、それが&quot;完了&quot;したというのをどうやって分かるのでしょうか？それをするために、描画コンテキストに <code>rendered</code> コールバックをアタッチする必要があります（これも 2.6 での新機能）。これは描画プロセス全体が終了したときにサーバーレンダラによって呼ばれます。現時点で、ストアは最終的な状態で満たされているはずです。そのコールバック内でコンテキストに状態を注入できます:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// entry-server.js</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createApp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./app'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> context <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> app<span class="token punctuation">,</span> router<span class="token punctuation">,</span> store <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">createApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span>url<span class="token punctuation">)</span>
+
+    router<span class="token punctuation">.</span><span class="token function">onReady</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// この `rendered` フックは、アプリケーションの描画が終えたときに呼び出されます</span>
+      context<span class="token punctuation">.</span><span class="token function-variable function">rendered</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// アプリケーションが描画された後、ストアには、</span>
+        <span class="token comment">// コンポーネントからの状態で満たされています</span>
+        <span class="token comment">// 状態を context に付随させ、`template` オプションがレンダラに利用されると、</span>
+        <span class="token comment">// 状態は自動的にシリアライズされ、HTML 内に `window.__INITIAL_STATE__` として埋め込まれます</span>
+        context<span class="token punctuation">.</span>state <span class="token operator">=</span> store<span class="token punctuation">.</span>state
+      <span class="token punctuation">}</span>
+
+      <span class="token function">resolve</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> reject<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>template</code> を使うと <code>context.state</code> は自動的に最終的な HTML に <code>window.__INITIAL_STATE__</code> という形の状態として埋め込まれます。クライアントサイドでは、アプリケーションがマウントされる前に、ストアがその状態を取得します:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// entry-client.js</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> app<span class="token punctuation">,</span> store <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">createApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>__INITIAL_STATE__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// サーバから注入されたデータでストアの状態を初期化します</span>
+  store<span class="token punctuation">.</span><span class="token function">replaceState</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>__INITIAL_STATE__<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+app<span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="ストアコードの分割"><a href="#ストアコードの分割" aria-hidden="true" class="header-anchor">#</a> ストアコードの分割</h2> <p>大規模なアプリケーションでは、Vuex ストアは複数のモジュールに分割される可能性があります。もちろん、これらのモジュールを対応するルートコンポーネントチャンクにコード分割することもできます。次のストアモジュールがあるとします:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// store/modules/foo.js</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  namespaced<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 重要: 状態は関数でなければならないため、</span>
+  <span class="token comment">// モジュールを複数回インスタンス化できます</span>
+  state<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    count<span class="token punctuation">:</span> <span class="token number">0</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+  actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    inc<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> commit <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'inc'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    inc<span class="token punctuation">:</span> state <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>count<span class="token operator">++</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>store.registerModule</code> を使用して、ルートコンポーネントの <code>asyncData</code> フックにこのモジュールを遅延登録することができます:</p> <div class="language-html extra-class"><pre class="language-html"><code>// ルートコンポーネントの内部
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>{{ fooCount }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token comment">// `store/index.js` の代わりにここでモジュールをインポートします</span>
+<span class="token keyword">import</span> fooStoreModule <span class="token keyword">from</span> <span class="token string">'../store/modules/foo'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">fooCount</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>foo<span class="token punctuation">.</span>count
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// サーバサイドのみ</span>
+  <span class="token function">serverPrefetch</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">registerFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fooInc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// クライアントサイドのみ</span>
+  <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// サーバ上で既に 'count` を増やしています</span>
+    <span class="token comment">// 'foo' 状態が既に存在するかどうかチェックすることで分かります</span>
+    <span class="token keyword">const</span> alreadyIncremented <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>foo
+    <span class="token comment">// foo モジュール を登録する</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">registerFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>alreadyIncremented<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fooInc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 重要: ルートが複数回訪問されたときに、</span>
+  <span class="token comment">// クライアントで重複してモジュールが登録されるのを避けて下さい</span>
+  <span class="token function">destroyed</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">unregisterModule</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  
+  methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">registerFoo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// サーバから注入された場合は、以前の状態を維持します</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">registerModule</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">,</span> fooStoreModule<span class="token punctuation">,</span> <span class="token punctuation">{</span> preserveState<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token function">fooInc</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'foo/inc'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>モジュールはルートコンポーネントの依存関係になっているので、webpack によってルートコンポーネントの非同期チャンクに移動されます。</p> <div class="warning custom-block"><p class="custom-block-title">WARNING</p> <p>サーバによって注入された状態を維持するため、<code>registerModule</code> に  <code>preserveState: true</code> オプションを使用することを忘れないでください。</p></div></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/ja/guide/routing.html" class="prev">
+          ルーティングとコード分割
+        </a></span> <span class="next"><a href="/ja/guide/hydration.html">
+          クライアントサイドでのハイドレーション
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/assets/js/38.cf5a3a6d.js" defer></script><script src="/assets/js/app.857f8442.js" defer></script>
+  </body>
+</html>

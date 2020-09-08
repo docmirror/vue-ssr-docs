@@ -1,6 +1,6 @@
 module.exports = {
-  dest: 'site',
-  base:'/vue-ssr-docs/',
+  dest: 'ssr-vuejs',
+  // base:'/vue-ssr-docs/',
   locales: {
     '/': {
       lang: 'zh-CN',
