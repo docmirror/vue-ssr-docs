@@ -4,8 +4,8 @@ module.exports = {
   locales: {
     '/': {
       lang: 'zh-CN',
-      title: 'Vue SSR 指南',
-      description: 'Vue.js 服务端渲染指南'
+      title: 'Vue SSR 中文指南',
+      description: 'Vue.js 服务端渲染指南，Vue SSR 中文文档，Vue SSR 国内镜像，Vue SSR 中文网，Vue SSR 官网打开慢，Vue SSR 官网打不开'
     },
     '/en': {
       lang: 'en-US',
