@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EBUSY: resource busy or locked, rmdir 'D:\Codes\docmirror\vue-ssr-docs\node_modules\vuepress-theme-vue'
+  Error: EBUSY: resource busy or locked, rmdir 'D:\Codes\docmirror\vue-ssr-docs\node_modules\@docmirror\vuepress-theme-vue'
 
 npm manifest: 
   {
@@ -43,7 +43,7 @@ npm manifest:
     "homepage": "https://github.com/vuejs/vue-ssr-docs#readme",
     "devDependencies": {
       "vuepress": "^0.14.11",
-      "@docmirror/vuepress-theme-vue": "^1.1.1"
+      "vuepress-theme-docmirror": "^1.1.1"
     }
   }
 
@@ -775,6 +775,11 @@ Lockfile:
       esutils "^2.0.2"
       lodash "^4.17.5"
       to-fast-properties "^2.0.0"
+  
+  "@docmirror/vuepress-theme-vue@^1.1.1":
+    version "1.1.1"
+    resolved "https://registry.npmjs.org/@docmirror/vuepress-theme-vue/-/vuepress-theme-vue-1.1.1.tgz#bb3927f25983aa468157306be05462ccaaf7ad17"
+    integrity sha512-kZCC1qbv7RG1Se7TZ+ot5t0Jdmwy05zMCT+jiUhLEAkP81E9ntqzEUwihqCgxMKJHICxICibk78HjoYLIV6Kkw==
   
   "@mrmlnc/readdir-enhanced@^2.2.1":
     version "2.2.1"
@@ -6773,11 +6778,6 @@ Lockfile:
       tapable "^1.0.0"
       toposort "^1.0.0"
       util.promisify "1.0.0"
-  
-  vuepress-theme-vue@^1.1.1:
-    version "1.1.1"
-    resolved "https://registry.yarnpkg.com/vuepress-theme-vue/-/vuepress-theme-vue-1.1.1.tgz#9fb14859cf1eecd18b44fed88e7f51e6573b437a"
-    integrity sha512-ZXe7TgJ9kW1LnLGi7772U4h27wdZqXuU3PlEq1rR7zwuxuszHIjn3zyxdQzbxVCChzaYz4dRMg1X4lVSnPn4vA==
   
   vuepress@^0.14.11:
     version "0.14.11"

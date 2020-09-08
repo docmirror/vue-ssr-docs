@@ -24,6 +24,6 @@
   "homepage": "https://github.com/vuejs/vue-ssr-docs#readme",
   "devDependencies": {
     "vuepress": "^0.14.11",
-    "@docmirror/vuepress-theme-vue": "^1.1.1"
+    "vuepress-theme-docmirror": "^1.1.1"
   }
 }

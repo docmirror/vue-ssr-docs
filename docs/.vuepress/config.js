@@ -24,7 +24,7 @@ module.exports = {
     }
   },
   serviceWorker: true,
-  // theme: 'vue',
+  theme: 'docmirror',
   themeConfig: {
     repo: 'vuejs/vue-ssr-docs',
     docsDir: 'docs',

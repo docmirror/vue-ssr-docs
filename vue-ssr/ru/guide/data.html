@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Предзагрузка данных и состояния | Руководство Vue SSR</title>
+    <meta name="description" content="Руководство по серверному рендерингу Vue.js">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.0d503026.css" as="style"><link rel="preload" href="/assets/js/app.da11bd17.js" as="script"><link rel="preload" href="/assets/js/23.86b71d0a.js" as="script"><link rel="prefetch" href="/assets/js/31.e70f56c9.js"><link rel="prefetch" href="/assets/js/1.4ba6ebae.js"><link rel="prefetch" href="/assets/js/2.535f3c53.js"><link rel="prefetch" href="/assets/js/3.e5730be8.js"><link rel="prefetch" href="/assets/js/4.0d83e6d4.js"><link rel="prefetch" href="/assets/js/5.9206f5fa.js"><link rel="prefetch" href="/assets/js/6.01fc6541.js"><link rel="prefetch" href="/assets/js/7.044d3af9.js"><link rel="prefetch" href="/assets/js/8.6a2b3380.js"><link rel="prefetch" href="/assets/js/9.63f778c7.js"><link rel="prefetch" href="/assets/js/10.f7960911.js"><link rel="prefetch" href="/assets/js/11.a592910a.js"><link rel="prefetch" href="/assets/js/12.6717a33d.js"><link rel="prefetch" href="/assets/js/13.682a40a0.js"><link rel="prefetch" href="/assets/js/14.98252396.js"><link rel="prefetch" href="/assets/js/15.fcc3f916.js"><link rel="prefetch" href="/assets/js/16.18e3e209.js"><link rel="prefetch" href="/assets/js/17.d5012f0a.js"><link rel="prefetch" href="/assets/js/18.3facfce8.js"><link rel="prefetch" href="/assets/js/19.6bced45f.js"><link rel="prefetch" href="/assets/js/20.f31829e2.js"><link rel="prefetch" href="/assets/js/21.9f5a2bb3.js"><link rel="prefetch" href="/assets/js/22.67a7b679.js"><link rel="prefetch" href="/assets/js/24.9a66fd58.js"><link rel="prefetch" href="/assets/js/25.f9522ed8.js"><link rel="prefetch" href="/assets/js/26.6e7f9c0d.js"><link rel="prefetch" href="/assets/js/27.e9d08b47.js"><link rel="prefetch" href="/assets/js/28.76611bff.js"><link rel="prefetch" href="/assets/js/29.ea593b17.js"><link rel="prefetch" href="/assets/js/30.c5eb0f84.js"><link rel="prefetch" href="/assets/js/32.5f5dd21a.js"><link rel="prefetch" href="/assets/js/33.0a625a25.js"><link rel="prefetch" href="/assets/js/34.d2733537.js"><link rel="prefetch" href="/assets/js/35.ddc557a5.js"><link rel="prefetch" href="/assets/js/36.a489edf1.js"><link rel="prefetch" href="/assets/js/37.136d8c88.js"><link rel="prefetch" href="/assets/js/38.cf5a3a6d.js"><link rel="prefetch" href="/assets/js/39.e9646dd4.js"><link rel="prefetch" href="/assets/js/40.4ce1a813.js"><link rel="prefetch" href="/assets/js/41.da8c6de2.js"><link rel="prefetch" href="/assets/js/42.c04c89ae.js"><link rel="prefetch" href="/assets/js/43.150fa123.js"><link rel="prefetch" href="/assets/js/44.fe85991f.js"><link rel="prefetch" href="/assets/js/45.a7ccbd7a.js"><link rel="prefetch" href="/assets/js/46.80bff42e.js"><link rel="prefetch" href="/assets/js/47.3938d7f5.js"><link rel="prefetch" href="/assets/js/48.bc91a1ba.js"><link rel="prefetch" href="/assets/js/49.311640c6.js"><link rel="prefetch" href="/assets/js/50.d3346077.js"><link rel="prefetch" href="/assets/js/51.e7924f3c.js"><link rel="prefetch" href="/assets/js/52.41301aea.js"><link rel="prefetch" href="/assets/js/53.ef26fe4d.js"><link rel="prefetch" href="/assets/js/54.5f99a77e.js"><link rel="prefetch" href="/assets/js/55.b28f8acf.js"><link rel="prefetch" href="/assets/js/56.c1e1643d.js"><link rel="prefetch" href="/assets/js/57.bfaa829e.js"><link rel="prefetch" href="/assets/js/58.97c40fd9.js"><link rel="prefetch" href="/assets/js/59.96f5b32e.js"><link rel="prefetch" href="/assets/js/60.5605712f.js"><link rel="prefetch" href="/assets/js/61.5678ceef.js"><link rel="prefetch" href="/assets/js/62.6717708a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0d503026.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/ru/" class="home-link router-link-active"><!----> <span class="site-name">Руководство Vue SSR</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/ru/guide/" class="nav-link router-link-active">Руководство</a></div><div class="nav-item"><a href="/ru/api/" class="nav-link">Справочник API</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Переводы</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/data.html" class="nav-link">简体中文</a></li><li class="dropdown-item"><!----> <a href="/en.html" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/ja/guide/data.html" class="nav-link">日本語</a></li><li class="dropdown-item"><!----> <a href="/ru/guide/data.html" class="nav-link router-link-exact-active router-link-active">Русский</a></li></ul></div></div> <a href="https://github.com/vuejs/vue-ssr-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/ru/guide/" class="nav-link router-link-active">Руководство</a></div><div class="nav-item"><a href="/ru/api/" class="nav-link">Справочник API</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Переводы</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/data.html" class="nav-link">简体中文</a></li><li class="dropdown-item"><!----> <a href="/en.html" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/ja/guide/data.html" class="nav-link">日本語</a></li><li class="dropdown-item"><!----> <a href="/ru/guide/data.html" class="nav-link router-link-exact-active router-link-active">Русский</a></li></ul></div></div> <a href="https://github.com/vuejs/vue-ssr-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav> <div style="padding:20px 30px  0px 30px;"><a target="_blank" href="https://www.aliyun.com/minisite/goods?userCode=qya11txb" style="width:100%"><img src="https://img.alicdn.com/tfs/TB1qnR3R1L2gK0jSZFmXXc7iXXa-440-240.jpg" style="width:100%"></a></div> <ul class="sidebar-links"><li><a href="/ru/" class="sidebar-link">Введение</a></li><li><a href="/ru/guide/" class="sidebar-link">Начало работы</a></li><li><a href="/ru/guide/universal.html" class="sidebar-link">Написание универсального кода</a></li><li><a href="/ru/guide/structure.html" class="sidebar-link">Структура исходного кода</a></li><li><a href="/ru/guide/routing.html" class="sidebar-link">Маршрутизация и разделение кода</a></li><li><a href="/ru/guide/data.html" class="active sidebar-link">Предзагрузка данных и состояния</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/ru/guide/data.html#хранение-данных" class="sidebar-link">Хранение данных</a></li><li class="sidebar-sub-header"><a href="/ru/guide/data.html#размещение-nогики-дnя-компонентов" class="sidebar-link">Размещение логики для компонентов</a></li><li class="sidebar-sub-header"><a href="/ru/guide/data.html#инъекция-финаnьного-состояния" class="sidebar-link">Инъекция финального состояния</a></li><li class="sidebar-sub-header"><a href="/ru/guide/data.html#раздеnение-кода-храниnища" class="sidebar-link">Разделение кода хранилища</a></li></ul></li><li><a href="/ru/guide/hydration.html" class="sidebar-link">Гидратация клиентской части</a></li><li><a href="/ru/guide/bundle-renderer.html" class="sidebar-link">Представляем Bundle Renderer</a></li><li><a href="/ru/guide/build-config.html" class="sidebar-link">Конфигурация сборки</a></li><li><a href="/ru/guide/css.html" class="sidebar-link">Управление CSS</a></li><li><a href="/ru/guide/head.html" class="sidebar-link">Управление head-тегами</a></li><li><a href="/ru/guide/caching.html" class="sidebar-link">Кэширование</a></li><li><a href="/ru/guide/streaming.html" class="sidebar-link">Стриминг</a></li><li><a href="/ru/guide/non-node.html" class="sidebar-link">Использование в не-Node.js окружениях</a></li></ul> </div> <div class="page"> <div class="content"><h1 id="предзагрузка-данных-и-состояния"><a href="#предзагрузка-данных-и-состояния" aria-hidden="true" class="header-anchor">#</a> Предзагрузка данных и состояния</h1> <h2 id="хранение-данных"><a href="#хранение-данных" aria-hidden="true" class="header-anchor">#</a> Хранение данных</h2> <p>Во время серверного рендеринга, мы отображаем «снимок» нашего приложения. Асинхронные данные из наших компонентов должны быть доступны до того, как мы смонтируем приложение на стороне клиента — в противном случае клиентское приложение будет отображено с использованием другого состояния, а гидратация завершится ошибкой.</p> <p>Для решения этой проблемы, полученные данные должны находиться вне компонентов представления, в специальном хранилище данных или в «контейнере состояния». На сервере мы можем предзагрузить и заполнить данные в хранилище перед рендерингом. Кроме того, мы будем сериализовывать и встраивать состояние в HTML после успешного рендеринга приложения. Хранилище на клиентской стороне сможет непосредственно получать вложенное состояние перед монтированием приложения.</p> <p>Для этой цели мы будем использовать официальную библиотеку управления состоянием — <a href="https://github.com/vuejs/vuex/" target="_blank" rel="noopener noreferrer">Vuex<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. Давайте создадим файл <code>store.js</code>, с некоторой симуляцией логики получения элемента на основе id:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// store.js</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span>
+
+<span class="token comment">// Предположим, что у нас есть универсальный API,</span>
+<span class="token comment">// который возвращает Promises и опустим детали реализации</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fetchItem <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./api'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createStore</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// ВАЖНО: состояние должно быть функцией,</span>
+    <span class="token comment">// чтобы модуль мог инстанцироваться несколько раз</span>
+    state<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+      items<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token function">fetchItem</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> commit <span class="token punctuation">}</span><span class="token punctuation">,</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// возвращаем Promise через `store.dispatch()`</span>
+        <span class="token comment">// чтобы могли определять когда данные будут загружены</span>
+        <span class="token keyword">return</span> <span class="token function">fetchItem</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>item <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'setItem'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> id<span class="token punctuation">,</span> item <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token function">setItem</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token punctuation">{</span> id<span class="token punctuation">,</span> item <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Vue<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>items<span class="token punctuation">,</span> id<span class="token punctuation">,</span> item<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="warning custom-block"><p class="custom-block-title">ВНИМАНИЕ</p> <p>Большую часть времени вы должны оборачивать <code>state</code> в функцию, чтобы она не вызвала утечек памяти при следующих запусках на стороне сервера.
+<a href="/ru/guide/structure.html#избегайте-сингnтонов-с-состоянием">Подробнее</a></p></div> <p>И обновляем <code>app.js</code>:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// app.js</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createRouter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./router'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createStore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./store'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> sync <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vuex-router-sync'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createApp</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Создаём экземпляры маршрутизатора и хранилища</span>
+  <span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token comment">// Синхронизируем чтобы состояние маршрута было доступно как часть хранилища</span>
+  <span class="token function">sync</span><span class="token punctuation">(</span>store<span class="token punctuation">,</span> router<span class="token punctuation">)</span>
+
+  <span class="token comment">// Создадим экземпляр приложения, внедряя и маршрутизатор и хранилище</span>
+  <span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    router<span class="token punctuation">,</span>
+    store<span class="token punctuation">,</span>
+    render<span class="token punctuation">:</span> h <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token comment">// Возвращаем приложение, маршрутизатор и хранилище.</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span> app<span class="token punctuation">,</span> router<span class="token punctuation">,</span> store <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="размещение-nогики-дnя-компонентов"><a href="#размещение-nогики-дnя-компонентов" aria-hidden="true" class="header-anchor">#</a> Размещение логики для компонентов</h2> <p>Итак, где мы должны размещать код, который вызывает действия по предзагрузке данных?</p> <p>Данные, которые нам нужно получить, определяются посещённым маршрутом — что также определяет какие компоненты должны будут отобразиться. Фактически, данные необходимые для данного маршрута, также требуются компонентам, отображаемым для этого маршрута. Поэтому будет логичным разместить логику получения данных внутри компонентов маршрута.</p> <p>Мы будем использовать опцию <code>serverPrefetch</code> (добавлена в версии 2.6.0+) в компонентах. Эта опция распознаётся рендерингом на стороне сервера и приостанавливает отрисовку до тех пор, пока Promise не разрешится. Это позволяет нам «дожидаться» асинхронных данных в процессе отрисовки.</p> <div class="tip custom-block"><p class="custom-block-title">Совет</p> <p>Можно использовать <code>serverPrefetch</code> в любом компоненте, а не только в компонентах указываемых в маршрутах.</p></div> <p>Вот пример компонента <code>Item.vue</code>, который отображается по маршруту <code>'/item/:id'</code>. Поскольку экземпляр компонента уже создан на этом этапе, он имеет доступ к <code>this</code>:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token comment">&lt;!-- Item.vue --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>item<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{ item.title }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-else</span><span class="token punctuation">&gt;</span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Отображаем элемент из состояния хранилища</span>
+    <span class="token function">item</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>items<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>$route<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// Только на стороне сервера</span>
+  <span class="token comment">// Будет автоматически вызвано рендером сервера</span>
+  <span class="token function">serverPrefetch</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// возвращает Promise из действия, поэтому</span>
+    <span class="token comment">// компонент ждёт данные перед рендерингом</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fetchItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// Только на стороне клиента</span>
+  <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Если мы не сделали ещё это на сервере,</span>
+    <span class="token comment">// то получаем элемент (сначала показав текст загрузки)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>item<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fetchItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">fetchItem</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// возвращаем Promise из действия</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'fetchItem'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$route<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><div class="warning custom-block"><p class="custom-block-title">ВНИМАНИЕ</p> <p>Необходимо проверять рендерился ли компонент на стороне сервера в хуке <code>mounted</code> во избежание выполнения логики загрузки дважды.</p></div> <div class="tip custom-block"><p class="custom-block-title">Совет</p> <p>Можно увидеть одинаковую логику <code>fetchItem()</code>, повторяющуюся несколько раз (в коллбэках <code>serverPrefetch</code>, <code>mounted</code> и <code>watch</code>) в каждом компоненте — рекомендуется создать собственную абстракцию (например, примесь или плагин) для упрощения подобного кода.</p></div> <h2 id="инъекция-финаnьного-состояния"><a href="#инъекция-финаnьного-состояния" aria-hidden="true" class="header-anchor">#</a> Инъекция финального состояния</h2> <p>Теперь мы знаем что процесс отрисовки будет дожидаться получения данных в наших компонентах, но как же узнавать когда всё «готово»? Для этого потребуется использовать коллбэк <code>rendered</code> в контексте рендера (также добавлено в версии 2.6), который будет вызывать серверный рендер после завершения всего процесса рендеринга. В этот момент хранилище должно быть заполнено данными своего финального состояния. Затем мы можем внедрить его в контекст в этом коллбэке:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// entry-server.js</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createApp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./app'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> context <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> app<span class="token punctuation">,</span> router<span class="token punctuation">,</span> store <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">createApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span>url<span class="token punctuation">)</span>
+
+    router<span class="token punctuation">.</span><span class="token function">onReady</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// Хук `rendered` будет вызван, когда приложение завершит рендеринг</span>
+      context<span class="token punctuation">.</span><span class="token function-variable function">rendered</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// После рендеринга приложение, наше хранилище теперь</span>
+        <span class="token comment">// заполнено финальным состоянием из наших компонентов.</span>
+        <span class="token comment">// Когда мы присоединяем состояние к контексту, и есть опция `template`</span>
+        <span class="token comment">// используемая для рендерера, состояние будет автоматически</span>
+        <span class="token comment">// сериализовано и внедрено в HTML как `window.__INITIAL_STATE__`.</span>
+        context<span class="token punctuation">.</span>state <span class="token operator">=</span> store<span class="token punctuation">.</span>state
+      <span class="token punctuation">}</span>
+
+      <span class="token function">resolve</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> reject<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>При использовании <code>template</code>, <code>context.state</code> будет автоматически встроен в финальный HTML как <code>window.__INITIAL_STATE__</code>. На клиенте хранилище должно получить состояние перед монтированием приложения:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// entry-client.js</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createApp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./app'</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> app<span class="token punctuation">,</span> store <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">createApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>__INITIAL_STATE__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Инициализируем состояние хранилища данными, внедрёнными на сервере</span>
+  store<span class="token punctuation">.</span><span class="token function">replaceState</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>__INITIAL_STATE__<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+app<span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="раздеnение-кода-храниnища"><a href="#раздеnение-кода-храниnища" aria-hidden="true" class="header-anchor">#</a> Разделение кода хранилища</h2> <p>В большом приложении хранилище Vuex будет скорее всего разделено на несколько модулей. Конечно, также можно разделить код этих модулей на соответствующие фрагменты компонента маршрута. Предположим, что у нас есть следующий модуль хранилища:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// store/modules/foo.js</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  namespaced<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// ВАЖНО: state должен быть функцией, чтобы</span>
+  <span class="token comment">// модуль мог инстанцироваться несколько раз</span>
+  state<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    count<span class="token punctuation">:</span> <span class="token number">0</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+  actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    inc<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> commit <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'inc'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    inc<span class="token punctuation">:</span> state <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>count<span class="token operator">++</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Мы можем использовать <code>store.registerModule</code> для ленивой регистрации этого модуля в хуке <code>serverPrefetch</code> компонента маршрута:</p> <div class="language-html extra-class"><pre class="language-html"><code>// внутри компонента маршрута
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>{{ fooCount }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token comment">// импортируем модуль здесь, а не в `store/index.js`</span>
+<span class="token keyword">import</span> fooStoreModule <span class="token keyword">from</span> <span class="token string">'../store/modules/foo'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">fooCount</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>foo<span class="token punctuation">.</span>count
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// Только на стороне сервера</span>
+  <span class="token function">serverPrefetch</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">registerModule</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">,</span> fooStoreModule<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fooInc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// Только на стороне клиента</span>
+  <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Мы уже увеличили значение 'count' на сервере</span>
+    <span class="token comment">// Определяем это, проверив что 'foo' уже существует</span>
+    <span class="token keyword">const</span> alreadyIncremented <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>foo
+    
+    <span class="token comment">// Регистрируем модуль foo</span>
+    <span class="token comment">// Сохраняем предыдущее состояние, если оно внедрялось на стороне сервера</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">registerModule</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">,</span> fooStoreModule<span class="token punctuation">,</span> <span class="token punctuation">{</span> preserveState<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>alreadyIncremented<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fooInc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// ВАЖНО: избегайте дублирования регистрации модуля на клиенте</span>
+  <span class="token comment">// когда маршрут посещается несколько раз.</span>
+  <span class="token function">destroyed</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">unregisterModule</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">fooInc</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'foo/inc'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>Поскольку модуль теперь является зависимостью компонента маршрута, он будет перемещён в асинхронный фрагмент компонента маршрута с помощью Webpack.</p> <div class="warning custom-block"><p class="custom-block-title">ВНИМАНИЕ</p> <p>Не забывайте использовать опцию <code>preserveState: true</code> для <code>registerModule</code> чтобы сохранять состояние, внедрённое сервером.</p></div></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/ru/guide/routing.html" class="prev">
+          Маршрутизация и разделение кода
+        </a></span> <span class="next"><a href="/ru/guide/hydration.html">
+          Гидратация клиентской части
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/assets/js/23.86b71d0a.js" defer></script><script src="/assets/js/app.da11bd17.js" defer></script>
+  </body>
+</html>
