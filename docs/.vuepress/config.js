@@ -1,5 +1,5 @@
 module.exports = {
-  dest: 'ssr-vuejs',
+  dest: 'vue-ssr',
   // base:'/vue-ssr-docs/',
   locales: {
     '/': {
